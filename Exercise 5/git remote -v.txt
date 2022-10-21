@@ -1,0 +1,4 @@
+$ git remote -v
+origin  https://github.com/olujohnson636/Altschool-Cloud-Exercises.git (fetch)
+origin  https://github.com/olujohnson636/Altschool-Cloud-Exercises.git (push)
+

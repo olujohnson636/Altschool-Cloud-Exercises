@@ -1,0 +1,30 @@
+$ git log
+commit 477ab3a1c6cb1d01c1239a0c9846613d3b90fbea (HEAD -> main, origin/main, origin/HEAD)
+Author: Oyebode Johnson <olujohnson636@gmail.com>
+Date:   Thu Oct 20 06:05:28 2022 +0100
+
+    My task 4 upload
+
+commit 683288d661985bc0106140d664ac49c887f413eb
+Author: Oyebode Johnson <olujohnson636@gmail.com>
+Date:   Mon Oct 17 19:44:56 2022 +0100
+
+    My task 3 upload
+
+commit 720d2393b897fe6b2a6e569ab3140aed1ca49d50
+Author: Oyebode Johnson <olujohnson636@gmail.com>
+Date:   Sat Oct 15 23:16:24 2022 +0100
+
+    My task 2 upload
+
+commit 856a10827fdf0fc6f28eb277bb4aa69256dd428f
+Author: Oyebode Johnson <olujohnson636@gmail.com>
+Date:   Sat Oct 15 20:23:08 2022 +0100
+
+    My task 1 upload
+
+commit f7f4558f83a62df757b62722041669dd7135a639
+Author: Oyebode Johnson <104788339+olujohnson636@users.noreply.github.com>
+Date:   Sat Oct 15 20:14:11 2022 +0100
+
+    Initial commit
