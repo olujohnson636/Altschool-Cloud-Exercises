@@ -1,0 +1,14 @@
+vagrant@server:~/ansible-apache$ systemctl status apache2
+● apache2.service - The Apache HTTP Server
+     Loaded: loaded (/lib/systemd/system/apache2.service; enabled; vendor preset: enabled)
+     Active: active (running) since Wed 2022-10-26 00:19:12 WAT; 11min ago
+       Docs: https://httpd.apache.org/docs/2.4/
+    Process: 39129 ExecStart=/usr/sbin/apachectl start (code=exited, status=0/SUCCESS)
+   Main PID: 39133 (apache2)
+      Tasks: 55 (limit: 1029)
+     Memory: 4.8M
+        CPU: 174ms
+     CGroup: /system.slice/apache2.service
+             ├─39133 /usr/sbin/apache2 -k start
+             ├─39134 /usr/sbin/apache2 -k start
+             └─39135 /usr/sbin/apache2 -k start

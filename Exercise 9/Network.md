@@ -1,0 +1,5 @@
+- IP Address           ==>   **193.16.20.35**         
+- Network IP            ==>  **193.16.20.32**           
+- Range of IP address   ==>  **193.16.20.33(HostMin) - 193.16.20.38 (HostMax)**   
+- Broadcast IP            ==> **193.16.20.39**  
+- Hosts/Network          ==> **6** 

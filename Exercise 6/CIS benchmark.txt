@@ -1,0 +1,10 @@
+vagrant@ubuntu-focal:~$ # httpd -M | egrep 'auth._'
+vagrant@ubuntu-focal:~$ # httpd -M | egrep 'ldap'
+vagrant@ubuntu-focal:~$ # httpd -M | grep log_config
+vagrant@ubuntu-focal:~$ # httpd -M | grep ' dav_[[:print:]]+module'
+vagrant@ubuntu-focal:~$ # httpd -M | egrep 'status_module'
+vagrant@ubuntu-focal:~$ # httpd -M | grep proxy_
+vagrant@ubuntu-focal:~$ # httpd -M | grep userdir_
+vagrant@ubuntu-focal:~$ # httpd -M | egrep 'info_module'
+vagrant@ubuntu-focal:~$ # httpd -M | grep auth_basic_module
+vagrant@ubuntu-focal:~$ # grep apache /etc/passwd
