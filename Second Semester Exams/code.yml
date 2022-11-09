@@ -1,6 +1,6 @@
 ---
-- name: [Insert Name]
-  hosts: [Insert Host]
+- name: Deploy Laravel and Set up Postgresql
+  hosts: all
   remote_user: root
  
  
@@ -9,7 +9,7 @@
       apt:
         update_cache: true
         upgrade: true
-    - name: [Insert Name]
+    - name: Install prerequisites
       apt:
         name:
           - python3-pip
@@ -23,14 +23,14 @@
           - wget
           - debconf-utils
           - libaio1
-    - name: [Insert Name]
+    - name: Install PyMySQL
       shell: python3 -m pip install PyMySQL
-    - name: [Insert Name]
+    - name: Install cryptography
       shell: pip install cryptography
-    - name: [Insert Name]
+    - name: Install LAMP Packages
       apt:
         name: apache2, apache2-utils
-    - name: [Insert Name]
+    - name: Install LAMP Packages
       apt_repository:
         repo: ppa:ondrej/php
     - name: [Insert Name]
@@ -81,7 +81,7 @@
       shell: bash /root/pgsql.sh
     - name: [Insert Name]
       shell: git clone https://github.com/f1amy/laravel-realworld-example-app.git /var/www/laravel
-    - name: [Insert Name]
+    - name: Copy index test page
       copy:
         dest: /var/www/laravel/.env
         content: |
@@ -132,22 +132,22 @@
           L5_SWAGGER_GENERATE_ALWAYS=true
           SAIL_XDEBUG_MODE=develop,debug
           SAIL_SKIP_CHECKS=true
-    - name: [Insert Name]
+    - name: Create document root
       blockinfile:
         path: /var/www/laravel/routes/web.php
         block: |
           Route::get('/', function () {
             return view('welcome');
           });
-    - name: [Insert Name]
+    - name: Grant permission
       shell: chown -R root:root /var/www/laravel
-    - name: [Insert Name]
+    - name: Create document root
       shell: chmod -R 0755 /var/www/laravel
-    - name: [Insert Name]
+    - name: Grant permission
       shell: chmod -R 0755 /var/www/laravel/storage
-    - name: [Insert Name]
+    - name: Grant permission
       shell: chmod -R 0755 /var/www/laravel/bootstrap/cache
-    - name: [Insert Name]
+    - name: Grant permission
       copy:
         dest: "/var/www/laravel/.htaccess"
         content: |
@@ -173,7 +173,7 @@
       shell: cd /var/www/laravel && composer create-project -n
     - name: [Insert Name]
       shell: cd /var/www/laravel && php artisan migrate --seed
-    - name: [Insert Name]
+    - name: Set up virtuahHost
       copy:
         dest: "/etc/apache2/sites-available/domain.conf"
         content: |
@@ -190,13 +190,13 @@
               ErrorLog ${APACHE_LOG_DIR}/error.log
               CustomLog ${APACHE_LOG_DIR}/access.log combined
           </VirtualHost>
-    - name: [Insert Name]
+    - name: Enable site
       shell: a2dissite 000-default.conf
-    - name: [Insert Name]
+    - name: Enable site
       shell: a2ensite laravel.conf
-    - name: [Insert Name]
+    - name: Enable rewrite
       shell: a2enmod rewrite
-    - name: [Insert Name]
+    - name: Restart Apache
       service:
         name: apache2
         state: restarted
