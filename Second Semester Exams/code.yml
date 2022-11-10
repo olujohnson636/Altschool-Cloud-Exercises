@@ -5,7 +5,7 @@
  
  
   tasks:
-    - name: [Insert Name]
+    - name: Setup Initialization
       apt:
         update_cache: true
         upgrade: true
@@ -27,59 +27,58 @@
       shell: python3 -m pip install PyMySQL
     - name: Install cryptography
       shell: pip install cryptography
-    - name: Install LAMP Packages
+    - name: Install Apache
       apt:
         name: apache2, apache2-utils
     - name: Install LAMP Packages
       apt_repository:
         repo: ppa:ondrej/php
-    - name: [Insert Name]
+    - name: pdate the packages 
       apt:
         update_cache: true
         upgrade: true
-    - name: [Insert Name]
+    - name: Install php8.1-extension_name
       apt:
         name: php8.1, libapache2-mod-php8.1, php8.1-cli, php8.1-common, php8.1-mysql, php8.1-opcache, php8.1-soap, php8.1-zip, php8.1-intl, php8.1-bcmath, php8.1-xml, php8.1-xmlrpc, php8.1-curl, php8.1-gd, php8.1-imagick, php8.1-cli, php8.1-dev, php8.1-imap, php8.1-mbstring
-    - name: [Insert Name]
-      shell:
+    - name: Starting mySQL server
         debconf-set-selections <<EOF
         mysql-apt-config mysql-apt-config/select-server select mysql-8.0
         "mysql-community-server mysql-community-server/root-pass password root"
         "mysql-community-server mysql-community-server/re-root-pass password root"
         EOF
-    - name: [Insert Name]
+    - name: Install MySQL
       shell: wget --user-agent="Mozilla" -O /tmp/mysql-apt-config_0.8.24-1_all.deb https://dev.mysql.com/get/mysql-apt-config_0.8.24-1_all.deb
-    - name: [Insert Name]
+    - name: Install the release package
       shell: sudo DEBIAN_FRONTEND=noninteractive dpkg -i /tmp/mysql-apt-config_0.8.24-1_all.deb < /dev/null > /dev/null
-    - name: [Insert Name]
+    - name: Update the packages 
       apt:
         update_cache: true
         upgrade: true
-    - name: [Insert Name]
+    - name: mySQL Server
       shell: DEBIAN_FRONTEND=noninteractive apt-get install mysql-server mysql-client --assume-yes --force-yes < /dev/null > /dev/null
-    - name: [Insert Name]
+    - name: Testing Database 
       shell: 'mysql -ne "{{ item }}"'
       with_items:
         - CREATE DATABASE laravel;
-    - name: [Insert Name]
+    - name: Create database
       shell: 'mysql -ne "{{ item }}"'
       with_items:
         - CREATE USER 'laravel'@'localhost' IDENTIFIED BY 'laravel';
-    - name: [Insert Name]
+    - name: Create User
       shell: 'mysql -ne "{{ item }}"'
       with_items:
         - GRANT ALL PRIVILEGES ON laravel.* TO 'laravel'@'localhost';
-    - name: [Insert Name]
+    - name: Grant Privileges
       shell: 'mysql -ne "{{ item }}"'
       with_items:
         - FLUSH PRIVILEGES;
-    - name: [Insert Name]
+    - name: Flush Privileges
       copy:
         src: /home/vagrant/pgsql.sh
         dest: /root
-    - name: [Insert Name]
+    - name: Execute User Postgres
       shell: bash /root/pgsql.sh
-    - name: [Insert Name]
+    - name: Clone the Laravel repository
       shell: git clone https://github.com/f1amy/laravel-realworld-example-app.git /var/www/laravel
     - name: Copy index test page
       copy:
@@ -159,19 +158,19 @@
             RewriteRule ^(.*)$ /public/$1
             RewriteRule ^(/)?$ public/index.php [L]
           </IfModule>
-    - name: [Insert Name]
+    - name: set up composer 
       shell: php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-    - name: [Insert Name]
+    - name: compposer file
       shell: php -r "if (hash_file('sha384', 'composer-setup.php') === '55ce33d7678c5a611085589f1f3ddf8b3c52d662cd01d4ba75c0ee0459970c2200a51f492d557530c71c15d8dba01eae') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
-    - name: [Insert Name]
+    - name: php set up
       shell: php composer-setup.php
-    - name: [Insert Name]
+    - name: install Composer
       shell: php -r "unlink('composer-setup.php');"
-    - name: [Insert Name]
+    - name: move composer to a directory
       shell: mv composer.phar /usr/local/bin/composer
-    - name: [Insert Name]
+    - name: Deploy new Laravel Project
       shell: cd /var/www/laravel && composer create-project -n
-    - name: [Insert Name]
+    - name: Run Migrations
       shell: cd /var/www/laravel && php artisan migrate --seed
     - name: Set up virtuahHost
       copy:
@@ -200,19 +199,19 @@
       service:
         name: apache2
         state: restarted
-    - name: [Insert Name]
+    - name: Setup correct permissions
       shell: chown -R www-data:www-data /var/www/laravel
-    - name: [Insert Name]
+    - name: Install Let’s Encrypt SSL
       apt:
         name:
           - snapd
-    - name: [Insert Name]
+    - name: Install Certbot 
       shell: snap install core
-    - name: [Insert Name]
+    - name: Refresh Certbot 
       shell: snap refresh core
-    - name: [Insert Name]
+    - name: Install Certbot tool
       shell: snap install --classic certbot
-    - name: [Insert Name]
+    - name: Configure Certbot 
       shell: ln -s /snap/bin/certbot /usr/bin/certbot
-    - name: [Insert Name]
-      shell: yes | certbot --apache --agree-tos --redirect -m email@domain.com -d domain.com
+    - name: Install certificates
+     shell: yes | certbot --apache --agree-tos --redirect -m email@domain.com -d domain.com
